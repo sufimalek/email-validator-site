@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EmailValidator — Verify & Clean Your Emails</title>
+  <meta name="description" content="Professional email validation service with real-time verification, bulk list cleanup, and API integration. Reduce bounce rates and improve deliverability.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Navbar -->
+  <nav class="navbar fixed top-0 w-full z-20" id="navbar">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold text-gradient">EmailValidator</a>
+      <div class="space-x-8 hidden md:flex">
+        <a href="index.html" class="nav-link text-gray-700 hover:text-indigo-600">Home</a>
+        <a href="about.html" class="nav-link text-gray-700 hover:text-indigo-600">About</a>
+        <a href="contact.html" class="nav-link text-gray-700 hover:text-indigo-600">Contact</a>
+        <!-- <a href="/pricing.html" class="btn btn-secondary">Pricing</a> -->
+      </div>
+      <div class="md:hidden">
+        <button id="menu-btn" class="text-gray-700 hover:text-indigo-600 text-2xl">☰</button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full w-64 bg-white shadow-xl z-30 p-6">
+      <button id="close-menu" class="text-gray-700 hover:text-indigo-600 text-2xl mb-6">×</button>
+      <div class="space-y-4">
+        <a href="/" class="block text-gray-700 hover:text-indigo-600 py-2">Home</a>
+        <a href="/about.html" class="block text-gray-700 hover:text-indigo-600 py-2">About</a>
+        <a href="/contact.html" class="block text-gray-700 hover:text-indigo-600 py-2">Contact</a>
+        <a href="/pricing.html" class="block btn btn-secondary text-center">Pricing</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-24">  <!-- offset because navbar is fixed -->
+    <!-- Hero -->
+    <section class="hero text-white py-32">
+      <div class="hero-content max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <h1 class="text-6xl font-bold mb-6 gradient-text">
+            Verify & Clean Emails,<br>
+            <span class="text-gradient">Boost Deliverability</span>
+          </h1>
+          <p class="text-xl mb-8 text-gray-200 max-w-3xl mx-auto">
+            Professional email validation service with real-time verification, bulk list cleanup, 
+            and seamless API integration. Reduce bounce rates and protect your sender reputation.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="#" class="btn btn-primary text-lg px-8 py-4">
+              Get Started Free
+              <span class="ml-2">→</span>
+            </a>
+            <a href="#demo" class="btn btn-secondary text-lg px-8 py-4">
+              Try Demo
+            </a>
+          </div>
+        </div>
+        
+        <!-- Interactive Email Validation Demo -->
+        <div id="demo" class="validation-demo">
+          <h3 class="text-2xl font-bold text-center mb-6 text-gray-800">Try Our Email Validator</h3>
+          <div class="relative">
+            <input 
+              type="email" 
+              id="email-input" 
+              class="demo-input" 
+              placeholder="Enter an email address to validate..."
+              autocomplete="off"
+            >
+            <button id="validate-btn" class="absolute right-2 top-1/2 transform -translate-y-1/2 btn btn-primary px-4 py-2 text-sm">
+              Validate
+            </button>
+          </div>
+          <div id="validation-result" class="validation-result">
+            <div id="result-content"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-20 px-6 bg-white">
+      <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-4">Trusted by Thousands of Businesses</h2>
+        <p class="text-gray-600 mb-12">Join companies worldwide who rely on our email validation service</p>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">2.5M+</div>
+            <div class="stat-label">Emails Validated Daily</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">99.9%</div>
+            <div class="stat-label">Accuracy Rate</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">50ms</div>
+            <div class="stat-label">Average Response Time</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">10K+</div>
+            <div class="stat-label">Happy Customers</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features / Benefits -->
+    <section id="features" class="py-20 px-6 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Powerful Features for Email Validation</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Everything you need to validate, clean, and maintain healthy email lists
+          </p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="feature-card text-center">
+            <div class="feature-icon">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Real-Time Validation</h3>
+            <p class="text-gray-600">Validate single or bulk emails instantly with our lightning-fast API. Get results in under 50ms with 99.9% accuracy.</p>
+          </div>
+          <div class="feature-card text-center">
+            <div class="feature-icon">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14,2 14,8 20,8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Bulk List Cleanup</h3>
+            <p class="text-gray-600">Upload your email lists and automatically eliminate invalid, spam traps, role-based, and disposable addresses.</p>
+          </div>
+          <div class="feature-card text-center">
+            <div class="feature-icon">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">API & Integration</h3>
+            <p class="text-gray-600">Easily integrate via REST API supporting all major languages. Use webhooks for real-time validation workflows.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-20 px-6 bg-white">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">How It Works in 3 Simple Steps</h2>
+          <p class="text-xl text-gray-600">Get started with email validation in minutes</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <span class="text-2xl font-bold text-indigo-600">1</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Create Account & Get API Key</h3>
+            <p class="text-gray-600">Sign up for free and get your API key. Start with 100 free validations to test our service.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <span class="text-2xl font-bold text-indigo-600">2</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Send Email Addresses</h3>
+            <p class="text-gray-600">Send single emails or bulk lists via our API. We check syntax, domain, SMTP, disposables, and spam traps.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <span class="text-2xl font-bold text-indigo-600">3</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Get Results & Take Action</h3>
+            <p class="text-gray-600">Receive detailed validation results instantly. Clean your lists and improve deliverability rates.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases / Who It's For -->
+    <section class="py-20 px-6 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Perfect for Every Business</h2>
+          <p class="text-xl text-gray-600">From startups to enterprises, our email validation service scales with your needs</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="feature-card">
+            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M3 3h18v18H3V3zm2 2v14h14V5H5zm2 2h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
+              </svg>
+            </div>
+            <h4 class="text-xl font-semibold mb-3">Email Marketers</h4>
+            <p class="text-gray-600">Reduce bounce rates by 30%, improve open & click rates, and protect your sender reputation with clean email lists.</p>
+          </div>
+          <div class="feature-card">
+            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            </div>
+            <h4 class="text-xl font-semibold mb-3">SaaS & Web Apps</h4>
+            <p class="text-gray-600">Validate user emails at signup or periodically to maintain list hygiene and prevent fake accounts.</p>
+          </div>
+          <div class="feature-card">
+            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+            <h4 class="text-xl font-semibold mb-3">Agencies & Enterprises</h4>
+            <p class="text-gray-600">Offer email validation as part of your services and validate large lists reliably with enterprise-grade infrastructure.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Integrations & API Support -->
+    <!-- <section class="py-20 px-6 bg-white">
+      <div class="max-w-6xl mx-auto text-center">
+        <div class="mb-16">
+          <h2 class="text-4xl font-bold mb-4">Works with Your Tech Stack</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Seamless integration with all major programming languages and platforms. 
+            Also connects with CRMs, marketing tools, and automation platforms.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center">
+          <div class="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition">
+            <img src="assets/icons/nodejs.svg" alt="Node.js" class="integration-logo h-12 mb-2" />
+            <span class="text-sm font-medium text-gray-600">Node.js</span>
+          </div>
+          <div class="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition">
+            <img src="assets/icons/python.svg" alt="Python" class="integration-logo h-12 mb-2" />
+            <span class="text-sm font-medium text-gray-600">Python</span>
+          </div>
+          <div class="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition">
+            <img src="assets/icons/go.svg" alt="Go" class="integration-logo h-12 mb-2" />
+            <span class="text-sm font-medium text-gray-600">Go</span>
+          </div>
+          <div class="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition">
+            <img src="assets/icons/php.svg" alt="PHP" class="integration-logo h-12 mb-2" />
+            <span class="text-sm font-medium text-gray-600">PHP</span>
+          </div>
+          <div class="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition">
+            <img src="assets/icons/ruby.svg" alt="Ruby" class="integration-logo h-12 mb-2" />
+            <span class="text-sm font-medium text-gray-600">Ruby</span>
+          </div>
+        </div>
+        <div class="mt-12">
+          <p class="text-gray-600 mb-6">Also available for .NET, Java, C++, and more</p>
+          <a href="/integrations.html" class="btn btn-secondary">View All Integrations</a>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Pricing Teaser -->
+    <!-- <section class="py-20 px-6 bg-gray-50">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-4">Pricing Tailored to Your Needs</h2>
+        <p class="text-xl text-gray-600 mb-8">Start free with 100 validations. Scale up with flexible monthly or pay-as-you-go plans.</p>
+        <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div class="bg-white p-6 rounded-lg shadow-sm border">
+            <h3 class="text-lg font-semibold mb-2">Free</h3>
+            <div class="text-3xl font-bold mb-4">$0<span class="text-sm font-normal text-gray-500">/month</span></div>
+            <ul class="text-sm text-gray-600 space-y-2 mb-6">
+              <li>100 validations/month</li>
+              <li>Basic validation</li>
+              <li>Email support</li>
+            </ul>
+            <a href="/signup.html" class="btn btn-secondary w-full">Get Started</a>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-lg border-2 border-indigo-500 relative">
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-indigo-500 text-white px-3 py-1 rounded-full text-sm">Most Popular</div>
+            <h3 class="text-lg font-semibold mb-2">Pro</h3>
+            <div class="text-3xl font-bold mb-4">$29<span class="text-sm font-normal text-gray-500">/month</span></div>
+            <ul class="text-sm text-gray-600 space-y-2 mb-6">
+              <li>10,000 validations/month</li>
+              <li>Advanced validation</li>
+              <li>API access</li>
+              <li>Priority support</li>
+            </ul>
+            <a href="/signup.html" class="btn btn-primary w-full">Choose Pro</a>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm border">
+            <h3 class="text-lg font-semibold mb-2">Enterprise</h3>
+            <div class="text-3xl font-bold mb-4">Custom</div>
+            <ul class="text-sm text-gray-600 space-y-2 mb-6">
+              <li>Unlimited validations</li>
+              <li>Custom integrations</li>
+              <li>Dedicated support</li>
+              <li>SLA guarantee</li>
+            </ul>
+            <a href="/contact.html" class="btn btn-secondary w-full">Contact Sales</a>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Testimonials / Social Proof -->
+    <section class="py-20 px-6 bg-white">
+      <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-4">What Our Users Say</h2>
+        <p class="text-xl text-gray-600 mb-12">Join thousands of satisfied customers who trust our email validation service</p>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="testimonial-card">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                <span class="text-indigo-600 font-bold text-lg">JD</span>
+              </div>
+              <div>
+                <h4 class="font-semibold">Jane Doe</h4>
+                <p class="text-sm text-gray-600">Marketing Lead, Acme Corp</p>
+              </div>
+            </div>
+            <p class="text-gray-700 italic">"This tool cut our bounce rate by 30% in just two weeks. The API integrations are easy and reliable. Our email deliverability has never been better."</p>
+            <div class="flex text-yellow-400 mt-4">
+              ★★★★★
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                <span class="text-green-600 font-bold text-lg">JS</span>
+              </div>
+              <div>
+                <h4 class="font-semibold">John Smith</h4>
+                <p class="text-sm text-gray-600">CTO, StartupX</p>
+              </div>
+            </div>
+            <p class="text-gray-700 italic">"We now validate user signup emails in real time. Spam signups dropped dramatically and our user quality improved significantly."</p>
+            <div class="flex text-yellow-400 mt-4">
+              ★★★★★
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security & Compliance / Trust -->
+    <section class="py-20 px-6 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Enterprise-Grade Security & Trust</h2>
+          <p class="text-xl text-gray-600">We take email data security seriously with industry-leading compliance and protection</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="M9 12l2 2 4-4"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold mb-2">SOC 2 Type II</h3>
+            <p class="text-sm text-gray-600">Certified infrastructure with regular security audits</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold mb-2">GDPR Compliant</h3>
+            <p class="text-sm text-gray-600">Full compliance with data protection regulations</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold mb-2">99.99% Uptime</h3>
+            <p class="text-sm text-gray-600">Reliable service with enterprise SLA guarantees</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold mb-2">Data Encryption</h3>
+            <p class="text-sm text-gray-600">End-to-end encryption for all data transmission</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-8 mb-12">
+        <div class="md:col-span-2">
+          <a href="/" class="text-2xl font-bold text-white mb-4 block">EmailValidator</a>
+          <p class="text-gray-400 mb-6 max-w-md">
+            Professional email validation service trusted by thousands of businesses worldwide. 
+            Verify, clean, and validate email addresses with confidence.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+              </svg>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+              </svg>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4">Platform</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="hover:text-white transition">Features</a></li>
+            <li><a href="#" class="hover:text-white transition">Pricing</a></li>
+            <li><a href="integrations.html" class="hover:text-white transition">Integrations</a></li>
+            <li><a href="#" class="hover:text-white transition">API Documentation</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4">Support & Legal</h4>
+          <ul class="space-y-3">
+            <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+            <li><a href="#" class="hover:text-white transition">Help Center</a></li>
+            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-8 text-center">
+        <p class="text-gray-400">© 2025 EmailValidator. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const closeMenuBtn = document.getElementById('close-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navbar = document.getElementById('navbar');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+    });
+
+    closeMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+      }
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Email validation demo with AJAX
+    const emailInput = document.getElementById('email-input');
+    const validateBtn = document.getElementById('validate-btn');
+    const validationResult = document.getElementById('validation-result');
+    const resultContent = document.getElementById('result-content');
+
+    // Configuration - Replace with your actual API endpoint
+    const API_CONFIG = {
+      // Replace this URL with your actual email validation API endpoint
+      url: 'https://your-api-endpoint.com/validate',
+      // Add your API key here if required
+      apiKey: 'your-api-key-here',
+      // Request timeout in milliseconds
+      timeout: 10000
+    };
+
+    function validateEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    async function validateEmailWithAPI(email) {
+      try {
+        const response = await fetch(API_CONFIG.url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${API_CONFIG.apiKey}`, // Adjust based on your API auth method
+            'X-API-Key': API_CONFIG.apiKey // Alternative header format
+          },
+          body: JSON.stringify({
+            email: email,
+            // Add any additional parameters your API expects
+            // format: 'json',
+            // check_mx: true,
+            // check_smtp: true
+          }),
+          // Add timeout
+          signal: AbortSignal.timeout(API_CONFIG.timeout)
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        // Adjust these mappings based on your API response format
+        return {
+          status: data.valid ? 'valid' : 'invalid',
+          message: data.message || (data.valid ? 'Email address is valid and deliverable.' : 'Email address is invalid.'),
+          details: data.details || null
+        };
+
+      } catch (error) {
+        console.error('API validation error:', error);
+        
+        // Fallback to client-side validation if API fails
+        return fallbackValidation(email);
+      }
+    }
+
+    function fallbackValidation(email) {
+      const isValid = validateEmail(email);
+      const isDisposable = email.includes('10minutemail') || email.includes('tempmail') || 
+                          email.includes('guerrillamail') || email.includes('mailinator');
+      const isRoleBased = ['admin', 'info', 'support', 'sales', 'noreply', 'no-reply', 'test'].some(role => 
+        email.toLowerCase().startsWith(role + '@')
+      );
+      
+      let status = 'valid';
+      let message = 'Email address is valid and deliverable.';
+      
+      if (!isValid) {
+        status = 'invalid';
+        message = 'Invalid email format.';
+      } else if (isDisposable) {
+        status = 'invalid';
+        message = 'Disposable email addresses are not allowed.';
+      } else if (isRoleBased) {
+        status = 'invalid';
+        message = 'Role-based email addresses are not recommended.';
+      }
+      
+      return { status, message };
+    }
+
+    async function handleValidation() {
+      const email = emailInput.value.trim();
+      
+      if (!email) {
+        alert('Please enter an email address');
+        return;
+      }
+
+      // Show loading state
+      validateBtn.innerHTML = '<span class="loading"></span>';
+      validateBtn.disabled = true;
+      emailInput.classList.remove('valid', 'invalid');
+      validationResult.classList.remove('show', 'valid', 'invalid');
+
+      try {
+        // Try API validation first, fallback to client-side if needed
+        const result = await validateEmailWithAPI(email);
+        
+        // Update UI
+        emailInput.classList.add(result.status);
+        validationResult.classList.add('show', result.status);
+        
+        // Display result with additional details if available
+        let message = result.message;
+        if (result.details) {
+          message += ` (${result.details})`;
+        }
+        resultContent.textContent = message;
+        
+        // Update button
+        validateBtn.innerHTML = 'Validate';
+        validateBtn.disabled = false;
+        
+      } catch (error) {
+        console.error('Validation error:', error);
+        
+        // Show error message
+        emailInput.classList.add('invalid');
+        validationResult.classList.add('show', 'invalid');
+        resultContent.textContent = 'Validation failed. Please try again.';
+        
+        validateBtn.innerHTML = 'Validate';
+        validateBtn.disabled = false;
+      }
+    }
+
+    validateBtn.addEventListener('click', handleValidation);
+    
+    emailInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        handleValidation();
+      }
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Fade in animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections for fade-in effect
+    document.querySelectorAll('section').forEach(section => {
+      section.classList.add('fade-in');
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
